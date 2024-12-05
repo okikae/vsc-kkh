@@ -1,0 +1,138 @@
+{
+  "name": "vsc-kkh",
+	"displayName": "kkh extension for VSC",
+	"description": "Replace words in a string using kkh dictionary.",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.63.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:vsc-kkh.modernToTrad",
+		"onCommand:vsc-kkh.tradToModern",
+		"onCommand:vsc-kkh.newToOld",
+		"onCommand:vsc-kkh.oldToNew",
+		"onCommand:vsc-kkh.modernNewToTradOld",
+		"onCommand:vsc-kkh.tradOldToModernNew",
+		"onCommand:vsc-kkh.showDictSize",
+		"onLanguage:markdown",
+		"onLanguage:html",
+		"onLanguage:tex",
+		"onLanguage:typ",
+		"onLanguage:howm",
+		"onLanguage:plaintext"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "vsc-kkh.modernToTrad",
+				"title": "かな：旧仮名遣いへ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.tradToModern",
+				"title": "かな：新仮名遣いへ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.newToOld",
+				"title": "漢字：旧漢字へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.oldToNew",
+				"title": "漢字：新漢字へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.modernNewToTradOld",
+				"title": "文章：旧字旧仮名へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.tradOldToModernNew",
+				"title": "文章：新字新仮名へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.showDictSize",
+				"title": "kkh 辞書の情報",
+				"category": "kkh"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.modernToTrad",
+					"alt": "",
+					"group": "navigation"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.tradToModern",
+					"alt": "",
+					"group": "navigation"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.newToOld",
+					"alt": "",
+					"group": "navigation"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.oldToNew",
+					"alt": "",
+					"group": "navigation"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.tradOldToModernNew",
+					"alt": "",
+					"group": "navigation"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.modernNewToTradOld",
+					"alt": "",
+					"group": "navigation"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.showDictSize",
+					"alt": "",
+					"group": "navigation"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.63.0",
+		"@types/glob": "^7.1.4",
+		"@types/mocha": "^9.0.0",
+		"@types/node": "14.x",
+		"@typescript-eslint/eslint-plugin": "^5.1.0",
+		"@typescript-eslint/parser": "^5.1.0",
+		"eslint": "^8.1.0",
+		"glob": "^7.1.7",
+		"mocha": "^9.1.3",
+		"typescript": "^4.4.4",
+		"@vscode/test-electron": "^1.6.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/okikae/vsc-kkh.git"
+  }
+}
