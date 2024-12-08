@@ -1,0 +1,44 @@
+name: Release VSCode Extension
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19"
+
+      - name: Install vsce
+        run: npm install -g vsce
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: Build extention
+        run: vsce package
+
+      - name: Compress extention
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          zip -r vsc-kkh-"$tag".zip vsc-kkh-"$tag".vsix
+
+      - name: Create draft release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          gh release create "$tag" --title="$tag" --draft \
+            vsc-kkh-"$tag".zip
