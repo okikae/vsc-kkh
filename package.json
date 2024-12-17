@@ -1,8 +1,8 @@
 {
   "name": "vsc-kkh",
-	"displayName": "kkh extension for VSC",
+	"displayName": "kkh for VSC",
 	"description": "Replace words in a string using kkh dictionary.",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
@@ -10,13 +10,6 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vsc-kkh.modernToTrad",
-		"onCommand:vsc-kkh.tradToModern",
-		"onCommand:vsc-kkh.newToOld",
-		"onCommand:vsc-kkh.oldToNew",
-		"onCommand:vsc-kkh.modernNewToTradOld",
-		"onCommand:vsc-kkh.tradOldToModernNew",
-		"onCommand:vsc-kkh.showDictSize",
 		"onLanguage:markdown",
 		"onLanguage:html",
 		"onLanguage:tex",
@@ -27,6 +20,16 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
+			{
+				"command": "vsc-kkh.modernNewToTradOld",
+				"title": "文章：旧字旧仮名へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.tradOldToModernNew",
+				"title": "文章：新字新仮名へ変換",
+				"category": "kkh"
+			},
 			{
 				"command": "vsc-kkh.modernToTrad",
 				"title": "かな：旧仮名遣いへ変換",
@@ -48,13 +51,43 @@
 				"category": "kkh"
 			},
 			{
-				"command": "vsc-kkh.modernNewToTradOld",
-				"title": "文章：旧字旧仮名へ変換",
+				"command": "vsc-kkh.odoriToNew",
+				"title": "踊り字：旧仮名の踊り字が使われた文を現代表記へ変換",
 				"category": "kkh"
 			},
 			{
-				"command": "vsc-kkh.tradOldToModernNew",
-				"title": "文章：新字新仮名へ変換",
+				"command": "vsc-kkh.odoriToOld",
+				"title": "踊り字：現代表記を旧仮名の踊り字を使った文をへ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.gairaiToNew",
+				"title": "外来語：昔風のカタカナを今風に変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.gairaiToOld",
+				"title": "外来語：カタカナ表記を昔風に変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.gouryakuToNew",
+				"title": "合略仮名：合略仮名が使われた文を現代表記へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.gouryakuToOld",
+				"title": "合略仮名：現代表記を合略仮名を使う文へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.yeToNew",
+				"title": "ヤ行エ：ヤ行エが使われた文を現代表記へ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.yeToOld",
+				"title": "ヤ行エ：現代表記をヤ行エを使う文へ変換",
 				"category": "kkh"
 			},
 			{
@@ -67,45 +100,93 @@
 			"editor/context": [
 				{
 					"when": "editorHasSelection",
-					"command": "vsc-kkh.modernToTrad",
-					"alt": "",
-					"group": "navigation"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.tradToModern",
-					"alt": "",
-					"group": "navigation"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.newToOld",
-					"alt": "",
-					"group": "navigation"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.oldToNew",
-					"alt": "",
-					"group": "navigation"
-				},
-				{
-					"when": "editorHasSelection",
 					"command": "vsc-kkh.tradOldToModernNew",
 					"alt": "",
-					"group": "navigation"
+					"group": "navigation@1"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.modernNewToTradOld",
 					"alt": "",
-					"group": "navigation"
+					"group": "navigation@2"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.modernToTrad",
+					"alt": "",
+					"group": "navigation@3"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.tradToModern",
+					"alt": "",
+					"group": "navigation@4"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.newToOld",
+					"alt": "",
+					"group": "navigation@5"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.oldToNew",
+					"alt": "",
+					"group": "navigation@6"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.odoriToNew",
+					"alt": "",
+					"group": "navigation@7"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.odoriToOld",
+					"alt": "",
+					"group": "navigation@8"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.gairaiToNew",
+					"alt": "",
+					"group": "navigation@9"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.gairaiToOld",
+					"alt": "",
+					"group": "navigation@10"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.gouryakuToNew",
+					"alt": "",
+					"group": "navigation@11"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.gouryakuToOld",
+					"alt": "",
+					"group": "navigation@12"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.yeToNew",
+					"alt": "",
+					"group": "navigation@13"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.yeToOld",
+					"alt": "",
+					"group": "navigation@14"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.showDictSize",
 					"alt": "",
-					"group": "navigation"
+					"group": "navigation@15"
 				}
 			]
 		}

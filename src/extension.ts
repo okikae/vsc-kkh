@@ -1,6 +1,12 @@
 import * as vscode from 'vscode';
-import { kanaArray } from "./kanajisyo";
-import { kanjiArray } from "./kanjijisyo";
+import { toTradKanaArray } from "./totradkanajisyo";
+import { toModernKanaArray } from "./tomodernkanajisyo";
+import { toOldKanjiArray } from "./tooldkanjijisyo";
+import { toNewKanjiArray } from "./tonewkanjijisyo";
+import { odoriEnhanceArray } from "./odorienhancejisyo";
+import { gairaiEnhanceArray } from "./gairaienhancejisyo";
+import { gouryakuEnhanceArray } from "./gouryakuenhancejisyo";
+import { yeEnhanceArray } from "./yeenhancejisyo";
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('my extension "vsc-kkh" is now active!');
@@ -15,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
             const document = editor.document;
             const selection = editor.selection;
             const selectedString = document.getText(selection);
-            const text = modernToTradFunc(selectedString);
+            const text = replaceStrings(selectedString, toTradKanaArray, "normal");
             editor.edit(editBuilder => {
                 editBuilder.replace(selection, text);
             });
@@ -30,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
             const document = editor.document;
             const selection = editor.selection;
             const selectedString = document.getText(selection);
-            const text = tradToModernFunc(selectedString);
+            const text = replaceStrings(selectedString, toModernKanaArray, "normal");
             editor.edit(editBuilder => {
                 editBuilder.replace(selection, text);
             });
@@ -45,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
             const document = editor.document;
             const selection = editor.selection;
             const selectedString = document.getText(selection);
-            const text = newToOldFunc(selectedString);
+            const text = replaceStrings(selectedString, toOldKanjiArray, "normal");
             editor.edit(editBuilder => {
                 editBuilder.replace(selection, text);
             });
@@ -60,7 +66,7 @@ export function activate(context: vscode.ExtensionContext) {
             const document = editor.document;
             const selection = editor.selection;
             const selectedString = document.getText(selection);
-            const text = oldToNewFunc(selectedString);
+            const text = replaceStrings(selectedString, toNewKanjiArray, "normal");
             editor.edit(editBuilder => {
                 editBuilder.replace(selection, text);
             });
@@ -75,7 +81,8 @@ export function activate(context: vscode.ExtensionContext) {
             const document = editor.document;
             const selection = editor.selection;
             const selectedString = document.getText(selection);
-            const text = modernNewToTradOldFunc(selectedString);
+            let tmpBuf = replaceStrings(selectedString, toTradKanaArray, "normal");
+            const text = replaceStrings(tmpBuf, toOldKanjiArray, "normal");
             editor.edit(editBuilder => {
                 editBuilder.replace(selection, text);
             });
@@ -90,7 +97,8 @@ export function activate(context: vscode.ExtensionContext) {
             const document = editor.document;
             const selection = editor.selection;
             const selectedString = document.getText(selection);
-            const text = tradOldToModernNewFunc(selectedString);
+            let tmpBuf = replaceStrings(selectedString, toNewKanjiArray, "normal");
+            const text = replaceStrings(tmpBuf, toModernKanaArray, "normal");
             editor.edit(editBuilder => {
                 editBuilder.replace(selection, text);
             });
@@ -98,63 +106,160 @@ export function activate(context: vscode.ExtensionContext) {
         //vscode.window.showInformationMessage('旧字旧仮名から新字新仮名へ変換した');
     });
 
-    // 辞書の大きさをポップアップメッセージに表示
-     const showDictSize = vscode.commands.registerCommand('vsc-kkh.showDictSize', function () {
-        const message = "かな辞書:" + kanaArray.length + " 漢字辞書:" + kanjiArray.length;
-        vscode.window.showInformationMessage(message);
+    // 旧仮名の踊り字が使われた文を現代表記へ変換
+    const odoriToNew = vscode.commands.registerCommand('vsc-kkh.odoriToNew', function () {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            const document = editor.document;
+            const selection = editor.selection;
+            const selectedString = document.getText(selection);
+            const text = replaceStrings(selectedString, odoriEnhanceArray, "reverse");
+            editor.edit(editBuilder => {
+                editBuilder.replace(selection, text);
+            });
+        }
+        //vscode.window.showInformationMessage('旧仮名の踊り字が使われた文を現代表記へ変換した');
     });
 
-    context.subscriptions.push(modernToTrad, tradToModern, newToOld, oldToNew, modernNewToTradOld, tradOldToModernNew, showDictSize);
-
-    // 新仮名遣いから旧仮名遣いへ変換
-    function modernToTradFunc(text:string): string {
-        let buf:string = text;
-        for (let i = 0; i < kanaArray.length; i++) {
-            buf = gsub(buf, kanaArray[i][0], kanaArray[i][1]);
+    // 現代表記を旧仮名の踊り字を使った文をへ変換
+    const odoriToOld = vscode.commands.registerCommand('vsc-kkh.odoriToOld', function () {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            const document = editor.document;
+            const selection = editor.selection;
+            const selectedString = document.getText(selection);
+            const text = replaceStrings(selectedString, odoriEnhanceArray, "normal");
+            editor.edit(editBuilder => {
+                editBuilder.replace(selection, text);
+            });
         }
-        return buf;
-    }
+        //vscode.window.showInformationMessage('現代表記を旧仮名の踊り字を使った文をへ変換した');
+    });
 
-    // 旧仮名遣いから新仮名遣いへ変換
-    function tradToModernFunc(text:string): string {
-        let buf:string = text;
-        for (let i = 0; i < kanaArray.length; i++) {
-            buf = gsub(buf, kanaArray[i][1], kanaArray[i][0]);
+        // 昔風のカタカナを今風に変換
+        const gairaiToNew = vscode.commands.registerCommand('vsc-kkh.gairaiToNew', function () {
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const document = editor.document;
+                const selection = editor.selection;
+                const selectedString = document.getText(selection);
+                const text = replaceStrings(selectedString, gairaiEnhanceArray, "reverse");
+                editor.edit(editBuilder => {
+                    editBuilder.replace(selection, text);
+                });
+            }
+            //vscode.window.showInformationMessage('昔風のカタカナを今風に変換した');
+        });
+
+        // カタカナ表記を昔風に変換
+        const gairaiToOld = vscode.commands.registerCommand('vsc-kkh.gairaiToOld', function () {
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const document = editor.document;
+                const selection = editor.selection;
+                const selectedString = document.getText(selection);
+                const text = replaceStrings(selectedString, gairaiEnhanceArray, "normal");
+                editor.edit(editBuilder => {
+                    editBuilder.replace(selection, text);
+                });
+            }
+            //vscode.window.showInformationMessage('カタカナを昔風に変換した');
+        });
+
+        // 合略仮名が使われた文を現代表記へ変換
+        const gouryakuToNew = vscode.commands.registerCommand('vsc-kkh.gouryakuToNew', function () {
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const document = editor.document;
+                const selection = editor.selection;
+                const selectedString = document.getText(selection);
+                const text = replaceStrings(selectedString, gouryakuEnhanceArray, "reverse");
+                editor.edit(editBuilder => {
+                    editBuilder.replace(selection, text);
+                });
+            }
+            //vscode.window.showInformationMessage('合略仮名が使われた文を現代表記へ変換した');
+        });
+
+        // 現代表記を合略仮名を使う文へ変換
+        const gouryakuToOld = vscode.commands.registerCommand('vsc-kkh.gouryakuToOld', function () {
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const document = editor.document;
+                const selection = editor.selection;
+                const selectedString = document.getText(selection);
+                const text = replaceStrings(selectedString, gouryakuEnhanceArray, "normal");
+                editor.edit(editBuilder => {
+                    editBuilder.replace(selection, text);
+                });
+            }
+            //vscode.window.showInformationMessage('現代表記を合略仮名を使う文へ変換した');
+        });
+
+        // ヤ行エが使われた文を現代表記へ変換
+        const yeToNew = vscode.commands.registerCommand('vsc-kkh.yeToNew', function () {
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const document = editor.document;
+                const selection = editor.selection;
+                const selectedString = document.getText(selection);
+                const text = replaceStrings(selectedString, yeEnhanceArray, "reverse");
+                editor.edit(editBuilder => {
+                    editBuilder.replace(selection, text);
+                });
+            }
+            //vscode.window.showInformationMessage('ヤ行エが使われた文を現代表記へ変換した');
+        });
+
+        // 現代表記をヤ行エを使う文へ変換
+        const yeToOld = vscode.commands.registerCommand('vsc-kkh.yeToOld', function () {
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const document = editor.document;
+                const selection = editor.selection;
+                const selectedString = document.getText(selection);
+                const text = replaceStrings(selectedString, yeEnhanceArray, "normal");
+                editor.edit(editBuilder => {
+                    editBuilder.replace(selection, text);
+                });
+            }
+            //vscode.window.showInformationMessage('ヤ行エが使われた文を現代表記へ変換した');
+        });
+
+        // 辞書の大きさをポップアップメッセージに表示
+     const showDictSize = vscode.commands.registerCommand('vsc-kkh.showDictSize', function () {
+        const message =
+        "かな辞書(旧→新)： " + toModernKanaArray.length +
+        "\nかな辞書(新→旧)： " + toTradKanaArray.length +
+        "\n漢字辞書(旧→新)： " + toNewKanjiArray.length +
+        "\n漢字辞書(新→旧)： " + toOldKanjiArray.length +
+        "\n拡張辞書(踊り字)： " + odoriEnhanceArray.length +
+        "\n拡張辞書(外来語)： " + gairaiEnhanceArray.length +
+        "\n拡張辞書(合略仮名)： " + gouryakuEnhanceArray.length +
+        "\n拡張辞書(ヤ行エ)： " + yeEnhanceArray.length;
+         vscode.window.showInformationMessage(message, {modal: true});
+    });
+
+    context.subscriptions.push(modernToTrad, tradToModern,
+        newToOld, oldToNew,
+        modernNewToTradOld, tradOldToModernNew,
+        odoriToNew, odoriToOld,
+        gairaiToNew, gairaiToOld,
+        gouryakuToNew, gouryakuToOld,
+        yeToNew, yeToOld,
+        showDictSize);
+
+    // 文字列を変換する関数
+    function replaceStrings(selectedText: string, jisyo: [string, string, string[]][], flag: string): string {
+        let buf: string = selectedText;
+        for (let i = 0; i < jisyo.length; i++) {
+            if (flag === "normal") {
+                buf = gsub(buf, jisyo[i][0], jisyo[i][1]);
+            } else if (flag === "reverse") {
+                buf = gsub(buf, jisyo[i][1], jisyo[i][0]);
+            } else {
+            }
         }
-        return buf;
-    }
-
-    // 新漢字から旧漢字へ変換
-    function newToOldFunc(text:string): string {
-        let buf:string = text;
-        for (let i = 0; i < kanjiArray.length; i++) {
-            buf = gsub(buf, kanjiArray[i][0], kanjiArray[i][1]);
-        }
-        return buf;
-    }
-
-    // 旧漢字から新漢字へ変換
-    function oldToNewFunc(text:string): string {
-        let buf:string = text;
-        for (let i = 0; i < kanjiArray.length; i++) {
-            buf = gsub(buf, kanjiArray[i][1], kanjiArray[i][0]);
-        }
-        return buf;
-    }
-
-    // 新字新仮名から旧字旧仮名へ変換
-    function modernNewToTradOldFunc(text:string): string {
-        let buf:string = text;
-        buf = modernToTradFunc(buf);
-        buf = newToOldFunc(buf);
-        return buf;
-    }
-
-    // 旧字旧仮名から新字新仮名へ変換
-    function tradOldToModernNewFunc(text:string): string {
-        let buf:string = text;
-        buf = tradToModernFunc(buf);
-        buf = oldToNewFunc(buf);
         return buf;
     }
 
