@@ -4,6 +4,9 @@ All notable changes to the "vsc-kkh" extension will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.5] - 2024-12-19
+- 誤字を修正
+
 ## [0.0.4] - 2024-12-17
 - 辞書を分割して更新
 

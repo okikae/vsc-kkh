@@ -121,7 +121,7 @@ export function activate(context: vscode.ExtensionContext) {
         //vscode.window.showInformationMessage('旧仮名の踊り字が使われた文を現代表記へ変換した');
     });
 
-    // 現代表記を旧仮名の踊り字を使った文をへ変換
+    // 現代表記を旧仮名の踊り字を使った文へ変換
     const odoriToOld = vscode.commands.registerCommand('vsc-kkh.odoriToOld', function () {
         const editor = vscode.window.activeTextEditor;
         if (editor) {
@@ -133,7 +133,7 @@ export function activate(context: vscode.ExtensionContext) {
                 editBuilder.replace(selection, text);
             });
         }
-        //vscode.window.showInformationMessage('現代表記を旧仮名の踊り字を使った文をへ変換した');
+        //vscode.window.showInformationMessage('現代表記を旧仮名の踊り字を使った文へ変換した');
     });
 
         // 昔風のカタカナを今風に変換
@@ -223,7 +223,7 @@ export function activate(context: vscode.ExtensionContext) {
                     editBuilder.replace(selection, text);
                 });
             }
-            //vscode.window.showInformationMessage('ヤ行エが使われた文を現代表記へ変換した');
+            //vscode.window.showInformationMessage('現代表記をヤ行エを使う文へ変換した');
         });
 
         // 辞書の大きさをポップアップメッセージに表示

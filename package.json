@@ -2,7 +2,7 @@
   "name": "vsc-kkh",
 	"displayName": "kkh for VSC",
 	"description": "Replace words in a string using kkh dictionary.",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
@@ -57,7 +57,7 @@
 			},
 			{
 				"command": "vsc-kkh.odoriToOld",
-				"title": "踊り字：現代表記を旧仮名の踊り字を使った文をへ変換",
+				"title": "踊り字：現代表記を旧仮名の踊り字を使った文へ変換",
 				"category": "kkh"
 			},
 			{
