@@ -2,7 +2,7 @@
   "name": "vsc-kkh",
 	"displayName": "kkh for VSC",
 	"description": "Replace words in a string using kkh dictionary.",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
