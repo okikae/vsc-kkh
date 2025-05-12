@@ -96,97 +96,108 @@
 				"category": "kkh"
 			}
 		],
+		"submenus": [
+			{
+				"id": "vsc-kkh.submenu",
+				"label": "kkh 変換"
+			}
+		],
 		"menus": {
-			"editor/context": [
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.tradOldToModernNew",
-					"alt": "",
-					"group": "navigation@1"
-				},
+			"vsc-kkh.submenu": [
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.modernNewToTradOld",
 					"alt": "",
-					"group": "navigation@2"
+					"group": "kkh@1"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.tradOldToModernNew",
+					"alt": "",
+					"group": "kkh@2"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.modernToTrad",
 					"alt": "",
-					"group": "navigation@3"
+					"group": "kkh@3"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.tradToModern",
 					"alt": "",
-					"group": "navigation@4"
+					"group": "kkh@4"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.newToOld",
 					"alt": "",
-					"group": "navigation@5"
+					"group": "kkh@5"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.oldToNew",
 					"alt": "",
-					"group": "navigation@6"
+					"group": "kkh@6"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.odoriToNew",
 					"alt": "",
-					"group": "navigation@7"
+					"group": "kkh@7"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.odoriToOld",
 					"alt": "",
-					"group": "navigation@8"
+					"group": "kkh@8"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.gairaiToNew",
 					"alt": "",
-					"group": "navigation@9"
+					"group": "kkh@9"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.gairaiToOld",
 					"alt": "",
-					"group": "navigation@10"
+					"group": "kkh@10"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.gouryakuToNew",
 					"alt": "",
-					"group": "navigation@11"
+					"group": "kkh@11"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.gouryakuToOld",
 					"alt": "",
-					"group": "navigation@12"
+					"group": "kkh@12"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.yeToNew",
 					"alt": "",
-					"group": "navigation@13"
+					"group": "kkh@13"
 				},
 				{
 					"when": "editorHasSelection",
 					"command": "vsc-kkh.yeToOld",
 					"alt": "",
-					"group": "navigation@14"
-				},
+					"group": "kkh@14"
+				}
+			],
+			"editor/context": [
 				{
-					"when": "editorHasSelection",
+					"submenu": "vsc-kkh.submenu",
+					"group": "kkh"
+					},
+				{
 					"command": "vsc-kkh.showDictSize",
 					"alt": "",
-					"group": "navigation@15"
+					"group": "kkh@15"
 				}
 			]
 		}
