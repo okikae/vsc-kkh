@@ -51,46 +51,6 @@
 				"category": "kkh"
 			},
 			{
-				"command": "vsc-kkh.odoriToNew",
-				"title": "踊り字：旧仮名の踊り字が使われた文を現代表記へ変換",
-				"category": "kkh"
-			},
-			{
-				"command": "vsc-kkh.odoriToOld",
-				"title": "踊り字：現代表記を旧仮名の踊り字を使った文へ変換",
-				"category": "kkh"
-			},
-			{
-				"command": "vsc-kkh.gairaiToNew",
-				"title": "外来語：昔風のカタカナを今風に変換",
-				"category": "kkh"
-			},
-			{
-				"command": "vsc-kkh.gairaiToOld",
-				"title": "外来語：カタカナ表記を昔風に変換",
-				"category": "kkh"
-			},
-			{
-				"command": "vsc-kkh.gouryakuToNew",
-				"title": "合略仮名：合略仮名が使われた文を現代表記へ変換",
-				"category": "kkh"
-			},
-			{
-				"command": "vsc-kkh.gouryakuToOld",
-				"title": "合略仮名：現代表記を合略仮名を使う文へ変換",
-				"category": "kkh"
-			},
-			{
-				"command": "vsc-kkh.yeToNew",
-				"title": "ヤ行エ：ヤ行エが使われた文を現代表記へ変換",
-				"category": "kkh"
-			},
-			{
-				"command": "vsc-kkh.yeToOld",
-				"title": "ヤ行エ：現代表記をヤ行エを使う文へ変換",
-				"category": "kkh"
-			},
-			{
 				"command": "vsc-kkh.showDictSize",
 				"title": "kkh 辞書の情報",
 				"category": "kkh"
@@ -139,54 +99,6 @@
 					"command": "vsc-kkh.oldToNew",
 					"alt": "",
 					"group": "kkh@6"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.odoriToNew",
-					"alt": "",
-					"group": "kkh@7"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.odoriToOld",
-					"alt": "",
-					"group": "kkh@8"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.gairaiToNew",
-					"alt": "",
-					"group": "kkh@9"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.gairaiToOld",
-					"alt": "",
-					"group": "kkh@10"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.gouryakuToNew",
-					"alt": "",
-					"group": "kkh@11"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.gouryakuToOld",
-					"alt": "",
-					"group": "kkh@12"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.yeToNew",
-					"alt": "",
-					"group": "kkh@13"
-				},
-				{
-					"when": "editorHasSelection",
-					"command": "vsc-kkh.yeToOld",
-					"alt": "",
-					"group": "kkh@14"
 				}
 			],
 			"editor/context": [
@@ -197,7 +109,7 @@
 				{
 					"command": "vsc-kkh.showDictSize",
 					"alt": "",
-					"group": "kkh@15"
+					"group": "kkh@7"
 				}
 			]
 		}
