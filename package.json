@@ -2,9 +2,9 @@
   "name": "vsc-kkh",
 	"displayName": "kkh for VSC",
 	"description": "Replace words in a string using kkh dictionary.",
-	"version": "0.0.8",
+	"version": "0.1.0",
 	"engines": {
-		"vscode": "^1.63.0"
+		"vscode": "^1.97.0"
 	},
 	"categories": [
 		"Other"
@@ -26,6 +26,11 @@
 				"category": "kkh"
 			},
 			{
+				"command": "vsc-kkh.modernNewToTradOldKogaki",
+				"title": "文章：旧字旧仮名へ変換(小書き)",
+				"category": "kkh"
+			},
+			{
 				"command": "vsc-kkh.tradOldToModernNew",
 				"title": "文章：新字新仮名へ変換",
 				"category": "kkh"
@@ -33,6 +38,11 @@
 			{
 				"command": "vsc-kkh.modernToTrad",
 				"title": "かな：旧仮名遣いへ変換",
+				"category": "kkh"
+			},
+			{
+				"command": "vsc-kkh.modernToTradKogaki",
+				"title": "かな：旧仮名遣いへ変換(小書き)",
 				"category": "kkh"
 			},
 			{
@@ -72,33 +82,45 @@
 				},
 				{
 					"when": "editorHasSelection",
-					"command": "vsc-kkh.tradOldToModernNew",
+					"command": "vsc-kkh.modernNewToTradOldKogaki",
 					"alt": "",
 					"group": "kkh@2"
 				},
 				{
 					"when": "editorHasSelection",
-					"command": "vsc-kkh.modernToTrad",
+					"command": "vsc-kkh.tradOldToModernNew",
 					"alt": "",
 					"group": "kkh@3"
 				},
 				{
 					"when": "editorHasSelection",
-					"command": "vsc-kkh.tradToModern",
+					"command": "vsc-kkh.modernToTrad",
 					"alt": "",
 					"group": "kkh@4"
 				},
 				{
 					"when": "editorHasSelection",
-					"command": "vsc-kkh.newToOld",
+					"command": "vsc-kkh.modernToTradKogaki",
 					"alt": "",
 					"group": "kkh@5"
 				},
 				{
 					"when": "editorHasSelection",
-					"command": "vsc-kkh.oldToNew",
+					"command": "vsc-kkh.tradToModern",
 					"alt": "",
 					"group": "kkh@6"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.newToOld",
+					"alt": "",
+					"group": "kkh@7"
+				},
+				{
+					"when": "editorHasSelection",
+					"command": "vsc-kkh.oldToNew",
+					"alt": "",
+					"group": "kkh@8"
 				}
 			],
 			"editor/context": [
@@ -109,7 +131,7 @@
 				{
 					"command": "vsc-kkh.showDictSize",
 					"alt": "",
-					"group": "kkh@7"
+					"group": "kkh@9"
 				}
 			]
 		}
@@ -125,13 +147,13 @@
 	"devDependencies": {
 		"@types/vscode": "^1.63.0",
 		"@types/glob": "^9.0.0",
-		"@types/mocha": "^9.1.1",
+		"@types/mocha": "^10.0.10",
 		"@types/node": "^18.19.130",
-		"@typescript-eslint/eslint-plugin": "^8.66.0",
-		"@typescript-eslint/parser": "^8.66.0",
+		"@typescript-eslint/eslint-plugin": "^8.70.0",
+		"@typescript-eslint/parser": "^8.70.0",
 		"eslint": "^10.8.0",
 		"glob": "^13.0.6",
-		"mocha": "^11.8.0",
+		"mocha": "^12.0.2",
 		"typescript": "^4.9.5",
 		"@vscode/test-electron": "^2.5.2"
 	},
